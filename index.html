@@ -16,6 +16,15 @@
       align-items: center;
       font-family: "Poppins", sans-serif;
       background: linear-gradient(180deg, #0178b8, #2339b8, #2c23b8);
+      padding: 24px 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      align-items: center;
     }
 
     .card {
@@ -28,7 +37,6 @@
       text-align: center;
     }
 
-    /* Avatar */
     .avatar {
       width: 96px;
       height: 96px;
@@ -43,7 +51,6 @@
     h1 { font-size: 22px; margin-bottom: 4px; }
     .subtitle { font-size: 13px; opacity: 0.9; margin-bottom: 20px; }
 
-    /* List container */
     .links {
       display: flex;
       flex-direction: column;
@@ -51,14 +58,12 @@
       margin-bottom: 22px;
     }
 
-    /* List item */
     .link-item {
       background: #ffffff;
       border-radius: 999px;
       padding: 8px 14px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
       gap: 12px;
       box-shadow: 0 8px 18px rgba(0,0,0,0.3);
       text-decoration: none;
@@ -71,7 +76,6 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
 
-    /* Icon bulat */
     .link-icon {
       width: 34px;
       height: 34px;
@@ -89,7 +93,6 @@
       object-fit: cover;
     }
 
-    /* Website Hiragana tetap pakai huruf biru お */
     .link-icon.blue {
       background: #10185b;
       color: #ffffff;
@@ -97,82 +100,71 @@
       font-size: 20px;
     }
 
-    /* QR */
-    .qr-section {
-      margin-top: 12px;
-    }
     .qr-section img {
       width: 180px;
-      max-width: 100%;
       border-radius: 16px;
       background: #ffffff;
       padding: 8px;
       box-shadow: 0 8px 18px rgba(0,0,0,0.35);
     }
+
     .qr-caption {
       margin-top: 10px;
       font-size: 14px;
       font-weight: 500;
     }
+
+    /* Card kosong */
+    .empty-card {
+      min-height: 160px;
+      opacity: 0.9;
+    }
   </style>
 </head>
 
 <body>
-  <main class="card">
+  <div class="container">
 
-    <div class="avatar"></div>
+    <!-- CARD UTAMA -->
+    <main class="card">
+      <div class="avatar"></div>
 
-    <h1>Shine Is One</h1>
-    <p class="subtitle">Shine like the sun and be one like gunawan</p>
+      <h1>Shine Is One</h1>
+      <p class="subtitle">Shine like the sun and be one like gunawan</p>
 
-    <div class="links">
+      <div class="links">
+        <a class="link-item" href="#" target="_blank">
+          <div class="link-icon"><img src="images/Mangadex.png"></div>
+          <div>Mangadex</div>
+        </a>
 
-      <!-- Mangadex -->
-      <a class="link-item"
-         href="https://mangadex.org/group/65234e45-8700-4a4a-95e0-ff344d72f430/romance-id?tab=feed&page=1"
-         target="_blank">
-        <div class="link-icon">
-          <img src="images/Mangadex.png" alt="Mangadex">
-        </div>
-        <div class="link-text">Mangadex</div>
-      </a>
+        <a class="link-item" href="#" target="_blank">
+          <div class="link-icon"><img src="images/Tiktok.png"></div>
+          <div>Tiktok</div>
+        </a>
 
-      <!-- TikTok -->
-      <a class="link-item"
-         href="https://www.tiktok.com/@shineisone?_r=1&_t=ZS-91nGGb9gEgH"
-         target="_blank">
-        <div class="link-icon">
-          <img src="images/Tiktok.png" alt="TikTok">
-        </div>
-        <div class="link-text">Tiktok</div>
-      </a>
+        <a class="link-item" href="#" target="_blank">
+          <div class="link-icon"><img src="images/Instagram.png"></div>
+          <div>Instagram</div>
+        </a>
 
-      <!-- Instagram -->
-      <a class="link-item"
-         href="https://www.instagram.com/shine.is.one?igsh=MXA3MDhhMGZlcTdrYQ%3D%3D&utm_source=qr"
-         target="_blank">
-        <div class="link-icon">
-          <img src="images/Instagram.png" alt="Instagram">
-        </div>
-        <div class="link-text">Instagram</div>
-      </a>
+        <a class="link-item" href="#" target="_blank">
+          <div class="link-icon blue">お</div>
+          <div>Website Hiragana</div>
+        </a>
+      </div>
 
-      <!-- Website Hiragana -->
-      <a class="link-item"
-         href="https://shineisone.github.io/Shiragana/"
-         target="_blank">
-        <div class="link-icon blue">お</div>
-        <div class="link-text">Website Hiragana</div>
-      </a>
+      <div class="qr-section">
+        <img src="images/QRIS.jpg" alt="QRIS">
+        <div class="qr-caption">Donate via QRIS</div>
+      </div>
+    </main>
 
-    </div>
+    <!-- CARD BARU (KOSONG) -->
+    <main class="card empty-card">
+      <!-- masih kosong -->
+    </main>
 
-    <!-- QR -->
-    <div class="qr-section">
-      <img src="images/QRIS.jpg" alt="QRIS">
-      <div class="qr-caption">Donate via QRIS</div>
-    </div>
-
-  </main>
+  </div>
 </body>
 </html>
