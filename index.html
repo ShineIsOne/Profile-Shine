@@ -1,170 +1,201 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Shine Is One</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Shine Is One</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<script>
+function toggleTutorial(){
+  const el = document.getElementById("tutorial");
+  el.style.display = el.style.display === "block" ? "none" : "block";
+  if(el.style.display === "none"){
+    window.scrollTo({ top: 0 });
+  }
+}
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(180deg, #0178b8, #2339b8, #2c23b8);
-      padding: 24px 0;
-    }
+function copyDNS(){
+  const text = "1dot1dot1dot1.cloudflare-dns.com";
+  navigator.clipboard.writeText(text).then(()=>{
+    const n = document.getElementById("copy-note");
+    n.classList.add("show");
+    setTimeout(()=>n.classList.remove("show"),1500);
+  });
+}
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      width: 100%;
-      align-items: center;
-    }
+function scrollToTop(){
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-    .card {
-      width: min(430px, 100% - 32px);
-      background: linear-gradient(180deg, #00a2ff, #2353ff);
-      border-radius: 32px;
-      padding: 32px 28px 28px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
-      color: #ffffff;
-      text-align: center;
-    }
-
-    .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      margin: 0 auto 12px;
-      background-size: cover;
-      background-position: center;
-      background-image: url("images/Avatar.jpg");
-      border: 4px solid rgba(255, 255, 255, 0.65);
-    }
-
-    h1 { font-size: 22px; margin-bottom: 4px; }
-    .subtitle { font-size: 13px; opacity: 0.9; margin-bottom: 20px; }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-
-    .link-item {
-      background: #ffffff;
-      border-radius: 999px;
-      padding: 8px 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
-      text-decoration: none;
-      color: #111;
-      transition: .15s;
-    }
-
-    .link-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    }
-
-    .link-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-    }
-
-    .link-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .link-icon.blue {
-      background: #10185b;
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 20px;
-    }
-
-    .qr-section img {
-      width: 180px;
-      border-radius: 16px;
-      background: #ffffff;
-      padding: 8px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.35);
-    }
-
-    .qr-caption {
-      margin-top: 10px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    /* Card kosong */
-    .empty-card {
-      min-height: 160px;
-      opacity: 0.9;
-    }
-  </style>
+window.addEventListener("scroll", () => {
+  const btn = document.getElementById("backToTop");
+  btn.style.display = window.scrollY > 300 ? "block" : "none";
+});
+</script>
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
 
-    <!-- CARD UTAMA -->
-    <main class="card">
-      <div class="avatar"></div>
+<!-- PROFILE CARD -->
+<div class="card profile">
+  <div class="avatar"></div>
+  <h1>Shine Is One</h1>
+  <p class="subtitle">Romance ID 👑</p>
 
-      <h1>Shine Is One</h1>
-      <p class="subtitle">Shine like the sun and be one like gunawan</p>
+  <div class="links">
+    <!-- Mangadex -->
+    <a class="link-item"
+       href="https://mangadex.org/group/65234e45-8700-4a4a-95e0-ff344d72f430/romance-id?tab=feed&page=1"
+       target="_blank" rel="noopener">
+      <div class="link-icon"><img src="images/Mangadex.png"></div>
+      Mangadex
+    </a>
 
-      <div class="links">
-        <a class="link-item" href="#" target="_blank">
-          <div class="link-icon"><img src="images/Mangadex.png"></div>
-          <div>Mangadex</div>
-        </a>
+    <!-- TikTok -->
+    <a class="link-item"
+       href="https://www.tiktok.com/@shineisone?_r=1&_t=ZS-91nGGb9gEgH"
+       target="_blank" rel="noopener">
+      <div class="link-icon"><img src="images/Tiktok.png"></div>
+      TikTok
+    </a>
 
-        <a class="link-item" href="#" target="_blank">
-          <div class="link-icon"><img src="images/Tiktok.png"></div>
-          <div>Tiktok</div>
-        </a>
+    <!-- Instagram -->
+    <a class="link-item"
+       href="https://www.instagram.com/shine.is.one?igsh=MXA3MDhhMGZlcTdrYQ%3D%3D&utm_source=qr"
+       target="_blank" rel="noopener">
+      <div class="link-icon"><img src="images/Instagram.png"></div>
+      Instagram
+    </a>
 
-        <a class="link-item" href="#" target="_blank">
-          <div class="link-icon"><img src="images/Instagram.png"></div>
-          <div>Instagram</div>
-        </a>
-
-        <a class="link-item" href="#" target="_blank">
-          <div class="link-icon blue">お</div>
-          <div>Website Hiragana</div>
-        </a>
-      </div>
-
-      <div class="qr-section">
-        <img src="images/QRIS.jpg" alt="QRIS">
-        <div class="qr-caption">Donate via QRIS</div>
-      </div>
-    </main>
-
-    <!-- CARD BARU (KOSONG) -->
-    <main class="card empty-card">
-      <!-- masih kosong -->
-    </main>
-
+    <!-- Website Hiragana -->
+    <a class="link-item"
+       href="https://shineisone.github.io/Shiragana/"
+       target="_blank" rel="noopener">
+      <div class="link-icon blue">お</div>
+      Website Hiragana
+    </a>
   </div>
+</div>
+
+<!-- COLLAPSE BUTTON -->
+<button class="collapse-btn" onclick="toggleTutorial()">
+  Tutorial Buka Web Mangadex
+</button>
+
+<!-- TUTORIAL CARD -->
+<div class="card tutorial" id="tutorial">
+
+<h2>Cara membuka website Mangadex.org</h2>
+
+<p>
+MangaDex sering tidak bisa dibuka langsung karena diblokir oleh provider di Indonesia.
+Cara blokirnya lewat pengaturan internet provider, sehingga alamat websitenya tidak bisa ditemukan.
+Hal ini mirip dengan yang terjadi pada Reddit, di mana situs baru bisa diakses normal jika memakai DNS publik seperti 1.1.1.1 atau VPN.
+Jadi, masalahnya ada di pembatasan akses lokal, bukan di websitenya.
+</p>
+
+<div class="section-title">Android</div>
+
+<p>
+Cara pertama kalau di Android, misal browser kalian Chrome, itu bisa buka mangadex dengan mudah.
+</p>
+
+<div class="step">
+<p>1.) Tekan titik tiga di pojok kanan atas</p>
+<img src="images/mangadex-tutorial/android-chrome/1.jpg">
+</div>
+
+<div class="step">
+<p>2.) Pilih "Setelan"</p>
+<img src="images/mangadex-tutorial/android-chrome/2.jpg">
+</div>
+
+<div class="step">
+<p>3.) Pilih "Privasi dan keamanan"</p>
+<img src="images/mangadex-tutorial/android-chrome/3.jpg">
+</div>
+
+<div class="step">
+<p>4.) Pilih "Gunakan DNS aman"</p>
+<img src="images/mangadex-tutorial/android-chrome/4.jpg">
+</div>
+
+<div class="step">
+<p>
+5.) Aktifkan "Gunakan DNS aman", dan pilih yang "Pilih penyedia lain".
+Kemudian pilih yang "Cloudflare (1.1.1.1)"
+</p>
+<img src="images/mangadex-tutorial/android-chrome/5.jpg">
+</div>
+
+<p>
+Cara kedua kalau di Android, bisa dengan cara mengubah settingan jaringan di Peraturan.
+</p>
+
+<div class="step">
+<p>
+1.) Buka "Peraturan" di Android, kemudian cari "Koneksi & Berbagi".
+(Kalau susah carinya, cari aja di pencarian Peraturan "DNS")
+</p>
+<img src="images/mangadex-tutorial/android-setting/a.jpg">
+</div>
+
+<div class="step">
+<p>2.) Kemudian pilih "DNS Pribadi"</p>
+<img src="images/mangadex-tutorial/android-setting/b.jpg">
+</div>
+
+<div class="step">
+<p>
+3.) Pilih "DNS pribadi khusus", dan isi dengan:
+<span class="highlight copyable" onclick="copyDNS()">1dot1dot1dot1.cloudflare-dns.com</span>
+<span id="copy-note" class="copy-note">tersalin</span>
+</p>
+<img src="images/mangadex-tutorial/android-setting/c.jpg">
+</div>
+
+<p>
+Selain DNS, di Android bisa menggunakan VPN, yaa kalian tahu sendiri lah,
+tinggal download VPN di Play Store, saran dari gw VPN yang bagus
+(sebenarnya masih DNS sih), nama apknya
+<a class="highlight link-warp"
+   href="https://play.google.com/store/apps/details?id=com.cloudflare.onedotonedotonedotone&hl=id&pli=1"
+   target="_blank" rel="noopener">
+   1.1.1.1 + WARP
+</a>.
+</p>
+
+<div class="section-title">iPhone</div>
+
+<p>
+Selanjutnya untuk para user iPhone, ini agak ribet nih,
+karena iPhone tidak ada settingan DNS di browser mereka.
+Jadi cara pertama, download VPN, atau cara kedua kalau tidak mau ribet pakek VPN,
+dengan cara "Private Browsing/Pribadi" di Safari.
+</p>
+
+<p>
+Kekurangan dari cara ini adalah tidak bisa simpan login akun mangadex kalian.
+Jadi cuman bisa cari manga &gt; baca.
+Tidak bisa kayak komentar, save manga, dll.
+</p>
+
+<div class="step">
+<img src="images/mangadex-tutorial/iphone/x.jpg">
+</div>
+
+<div class="step">
+<img src="images/mangadex-tutorial/iphone/z.jpg">
+</div>
+
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑</button>
+
+</div>
 </body>
 </html>
