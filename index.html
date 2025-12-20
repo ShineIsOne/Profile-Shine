@@ -5,7 +5,7 @@
 <title>Shine Is One</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
 function toggleTutorial(){
@@ -33,6 +33,13 @@ window.addEventListener("scroll", () => {
   const btn = document.getElementById("backToTop");
   btn.style.display = window.scrollY > 300 ? "block" : "none";
 });
+
+function openQR(){
+  document.getElementById("qrisModal").classList.add("show");
+}
+function closeQR(){
+  document.getElementById("qrisModal").classList.remove("show");
+}
 </script>
 </head>
 
@@ -46,41 +53,32 @@ window.addEventListener("scroll", () => {
   <p class="subtitle">Romance ID 👑</p>
 
   <div class="links">
-    <!-- Mangadex -->
-    <a class="link-item"
-       href="https://mangadex.org/group/65234e45-8700-4a4a-95e0-ff344d72f430/romance-id?tab=feed&page=1"
-       target="_blank" rel="noopener">
+    <a class="link-item" href="https://mangadex.org/group/65234e45-8700-4a4a-95e0-ff344d72f430/romance-id" target="_blank">
       <div class="link-icon"><img src="images/Mangadex.png"></div>
       Mangadex
     </a>
 
-    <!-- TikTok -->
-    <a class="link-item"
-       href="https://www.tiktok.com/@shineisone?_r=1&_t=ZS-91nGGb9gEgH"
-       target="_blank" rel="noopener">
+    <a class="link-item" href="https://www.tiktok.com/@shineisone" target="_blank">
       <div class="link-icon"><img src="images/Tiktok.png"></div>
       TikTok
     </a>
 
-    <!-- Instagram -->
-    <a class="link-item"
-       href="https://www.instagram.com/shine.is.one?igsh=MXA3MDhhMGZlcTdrYQ%3D%3D&utm_source=qr"
-       target="_blank" rel="noopener">
+    <a class="link-item" href="https://www.instagram.com/shine.is.one" target="_blank">
       <div class="link-icon"><img src="images/Instagram.png"></div>
       Instagram
     </a>
 
-    <!-- Website Hiragana -->
-    <a class="link-item"
-       href="https://shineisone.github.io/Shiragana/"
-       target="_blank" rel="noopener">
+    <a class="link-item" href="https://shineisone.github.io/Shiragana/" target="_blank">
       <div class="link-icon blue">お</div>
       Website Hiragana
     </a>
+
+    <!-- DONATE QRIS -->
+    <button class="donate-btn" onclick="openQR()">Donate via QRIS</button>
   </div>
 </div>
 
-<!-- COLLAPSE BUTTON -->
+<!-- COLLAPSE -->
 <button class="collapse-btn" onclick="toggleTutorial()">
   Tutorial Buka Web Mangadex
 </button>
@@ -161,10 +159,8 @@ Cara kedua kalau di Android, bisa dengan cara mengubah settingan jaringan di Per
 Selain DNS, di Android bisa menggunakan VPN, yaa kalian tahu sendiri lah,
 tinggal download VPN di Play Store, saran dari gw VPN yang bagus
 (sebenarnya masih DNS sih), nama apknya
-<a class="highlight link-warp"
-   href="https://play.google.com/store/apps/details?id=com.cloudflare.onedotonedotonedotone&hl=id&pli=1"
-   target="_blank" rel="noopener">
-   1.1.1.1 + WARP
+<a class="highlight link-warp" href="https://play.google.com/store/apps/details?id=com.cloudflare.onedotonedotonedotone&hl=id" target="_blank">
+1.1.1.1 + WARP
 </a>.
 </p>
 
@@ -193,9 +189,16 @@ Tidak bisa kayak komentar, save manga, dll.
 
 </div>
 
-<!-- BACK TO TOP -->
 <button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑</button>
-
 </div>
+
+<!-- MODAL QRIS -->
+<div id="qrisModal" class="modal" onclick="closeQR()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <img src="images/QRIS.jpg" alt="QRIS">
+    <button class="close-btn" onclick="closeQR()">Tutup</button>
+  </div>
+</div>
+
 </body>
 </html>

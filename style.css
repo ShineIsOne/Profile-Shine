@@ -38,12 +38,7 @@ h1{font-size:22px;margin-bottom:4px}
 .subtitle{font-size:13px;opacity:.9;margin-bottom:18px}
 
 /* LINKS */
-.links{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
+.links{display:flex;flex-direction:column;gap:12px}
 .link-item{
   background:#fee715;
   color:#111820;
@@ -55,30 +50,29 @@ h1{font-size:22px;margin-bottom:4px}
   text-decoration:none;
   font-weight:500;
 }
-
-/* ICON – SUDAH TIDAK KOTAK */
 .link-icon{
-  width:34px;
-  height:34px;
-  border-radius:10px;          /* ⬅️ sudut cekung */
+  width:34px;height:34px;
+  border-radius:10px;
   background:#111820;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
 }
+.link-icon img{width:70%;height:70%;object-fit:contain}
+.link-icon.blue{color:#fee715;font-weight:600;font-size:20px}
 
-.link-icon img{
-  width:70%;
-  height:70%;
-  object-fit:contain;
-}
-
-/* icon hiragana */
-.link-icon.blue{
-  color:#fee715;
-  font-weight:600;
-  font-size:20px;
+/* DONATE */
+.donate-btn{
+  align-self:center;
+  width:55%;
+  background:#fee715;
+  color:#111820;
+  border:none;
+  border-radius:999px;
+  padding:10px 0;
+  font-weight:700;
+  cursor:pointer;
 }
 
 /* COLLAPSE */
@@ -104,13 +98,8 @@ h1{font-size:22px;margin-bottom:4px}
 
 /* HIGHLIGHT */
 .highlight{color:#fee715;font-weight:600}
-.copyable{cursor:pointer;user-select:all}
-.copy-note{
-  margin-left:8px;
-  font-size:11px;
-  opacity:0;
-  transition:.2s;
-}
+.copyable{cursor:pointer}
+.copy-note{margin-left:8px;font-size:11px;opacity:0}
 .copy-note.show{opacity:1}
 .link-warp{text-decoration:none}
 
@@ -129,5 +118,49 @@ h1{font-size:22px;margin-bottom:4px}
   font-weight:700;
   cursor:pointer;
   display:none;
-  box-shadow:0 8px 20px rgba(0,0,0,.5);
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.modal.show{display:flex}
+
+.modal-box{
+  background:#111820;
+  padding:20px;
+  border-radius:22px;
+  text-align:center;
+}
+.modal-box img{
+  max-width:260px;
+  width:100%;
+  border-radius:14px;
+  margin-bottom:16px;
+}
+.close-btn{
+  margin:0 auto;
+  background:#fee715;
+  color:#111820;
+  border:none;
+  padding:10px 24px;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+}
+/* FIX TOMBOL TUTUP DI TENGAH */
+.modal-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.close-btn{
+  margin-top:16px;
 }
