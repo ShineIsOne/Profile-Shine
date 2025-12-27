@@ -46,7 +46,6 @@ function closeQR(){
 <body>
 <div class="container">
 
-<!-- PROFILE CARD -->
 <div class="card profile">
   <div class="avatar"></div>
   <h1>Shine Is One</h1>
@@ -68,22 +67,18 @@ function closeQR(){
       Instagram
     </a>
 
-    <a class="link-item" href="https://shineisone.github.io/Shiragana/" target="_blank">
-      <div class="link-icon blue">お</div>
-      Website Hiragana
+    <a class="link-item" href="https://shineisone.github.io/RomanceID/" target="_blank">
+      <div class="link-icon"><img src="images/Manga.png"></div>
+      List Project TL Manga
     </a>
-
-    <!-- DONATE QRIS -->
     <button class="donate-btn" onclick="openQR()">Donate via QRIS</button>
   </div>
 </div>
 
-<!-- COLLAPSE -->
 <button class="collapse-btn" onclick="toggleTutorial()">
   Tutorial Buka Web Mangadex
 </button>
 
-<!-- TUTORIAL CARD -->
 <div class="card tutorial" id="tutorial">
 
 <h2>Cara membuka website Mangadex.org</h2>
@@ -192,7 +187,6 @@ Tidak bisa kayak komentar, save manga, dll.
 <button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑</button>
 </div>
 
-<!-- MODAL QRIS -->
 <div id="qrisModal" class="modal" onclick="closeQR()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <img src="images/QRIS.jpg" alt="QRIS">
