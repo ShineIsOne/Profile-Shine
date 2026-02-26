@@ -40,6 +40,22 @@ function openQR(){
 function closeQR(){
   document.getElementById("qrisModal").classList.remove("show");
 }
+
+/* === FITUR DOWNLOAD (FORCE DOWNLOAD) === */
+function downloadQR(){
+  fetch("images/QRIS.jpg")
+    .then(response => response.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "QRIS-Shine-Is-One.jpg";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    });
+}
 </script>
 </head>
 
@@ -190,6 +206,11 @@ Tidak bisa kayak komentar, save manga, dll.
 <div id="qrisModal" class="modal" onclick="closeQR()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <img src="images/QRIS.jpg" alt="QRIS">
+
+    <a href="images/QRIS.jpg" download="QRIS-Shine-Is-One.jpg" target="_blank" rel="noopener">
+      Download
+    </a>
+
     <button class="close-btn" onclick="closeQR()">Tutup</button>
   </div>
 </div>
