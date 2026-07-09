@@ -2,218 +2,584 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Shine Is One</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<script>
-function toggleTutorial(){
-  const el = document.getElementById("tutorial");
-  el.style.display = el.style.display === "block" ? "none" : "block";
-  if(el.style.display === "none"){
-    window.scrollTo({ top: 0 });
+<title>Shine Is One — Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#111820;
+    --bg-soft:#161f29;
+    --card:#1b2530;
+    --line: rgba(254,231,21,0.14);
+    --yellow:#fee715;
+    --yellow-dim: rgba(254,231,21,0.55);
+    --text:#eef2f5;
+    --text-dim:#93a1ad;
   }
-}
 
-function copyDNS(){
-  const text = "1dot1dot1dot1.cloudflare-dns.com";
-  navigator.clipboard.writeText(text).then(()=>{
-    const n = document.getElementById("copy-note");
-    n.classList.add("show");
-    setTimeout(()=>n.classList.remove("show"),1500);
-  });
-}
+  *{ box-sizing:border-box; }
 
-function scrollToTop(){
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
 
-window.addEventListener("scroll", () => {
-  const btn = document.getElementById("backToTop");
-  btn.style.display = window.scrollY > 300 ? "block" : "none";
-});
+  body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:56px 18px 80px;
+    position:relative;
+    overflow-x:hidden;
+  }
 
-function openQR(){
-  document.getElementById("qrisModal").classList.add("show");
-}
-function closeQR(){
-  document.getElementById("qrisModal").classList.remove("show");
-}
+  /* subtle ambient glow */
+  body::before{
+    content:"";
+    position:fixed;
+    top:-160px; left:50%;
+    transform:translateX(-50%);
+    width:520px; height:520px;
+    background:radial-gradient(circle, rgba(254,231,21,0.10) 0%, rgba(254,231,21,0) 70%);
+    pointer-events:none;
+  }
 
-/* === FITUR DOWNLOAD (FORCE DOWNLOAD) === */
-function downloadQR(){
-  fetch("images/QRIS.jpg")
-    .then(response => response.blob())
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "QRIS-Shine-Is-One.jpg";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-    });
-}
-</script>
+  /* faint grain */
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:420px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- profile ---------- */
+  .avatar{
+    width:96px; height:96px;
+    border-radius:50%;
+    background:var(--card);
+    border:2px solid var(--yellow);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:32px;
+    color:var(--yellow);
+    box-shadow: 0 0 0 6px rgba(254,231,21,0.06);
+    margin-bottom:20px;
+    overflow:hidden;
+  }
+  .avatar img{ width:100%; height:100%; object-fit:cover; }
+
+  .name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:-0.01em;
+    margin:0 0 6px;
+    text-align:center;
+  }
+
+  .bio{
+    color:var(--text-dim);
+    font-size:14.5px;
+    text-align:center;
+    line-height:1.55;
+    max-width:320px;
+    margin:0 0 8px;
+  }
+
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--yellow);
+    margin-bottom:28px;
+    opacity:0.85;
+  }
+
+  /* ---------- links ---------- */
+  .links{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .link-item{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    padding:15px 18px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    text-decoration:none;
+    color:var(--text);
+    overflow:hidden;
+    isolation:isolate;
+    transition: border-color .25s ease, transform .18s ease;
+  }
+
+  .link-item::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:var(--yellow);
+    transform:translateX(-101%);
+    transition:transform .32s cubic-bezier(.65,0,.35,1);
+    z-index:-1;
+  }
+
+  .link-item:hover{
+    border-color: var(--yellow);
+    transform:translateY(-1px);
+  }
+  .link-item:hover::before{
+    transform:translateX(0);
+  }
+  .link-item:hover .link-icon,
+  .link-item:hover .link-label,
+  .link-item:hover .link-tag,
+  .link-item:hover .link-arrow{
+    color:#111820;
+  }
+  .link-item:hover .link-icon svg{ stroke:#111820; }
+  .link-item:hover .link-tag{
+    background:#111820;
+    color:var(--yellow);
+  }
+
+  .link-icon{
+    flex:0 0 auto;
+    width:38px; height:38px;
+    border-radius:10px;
+    background:rgba(254,231,21,0.08);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--yellow);
+    transition:color .2s ease;
+  }
+  .link-icon svg{ width:19px; height:19px; stroke:var(--yellow); transition:stroke .2s ease; }
+
+  .link-text{ flex:1; min-width:0; }
+  .link-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    display:block;
+    transition:color .2s ease;
+  }
+  .link-sub{
+    font-size:12.5px;
+    color:var(--text-dim);
+    display:block;
+    margin-top:1px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .link-tag{
+    flex:0 0 auto;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:4px 8px;
+    border-radius:6px;
+    background:rgba(254,231,21,0.10);
+    color:var(--yellow-dim);
+    transition:all .2s ease;
+  }
+
+  /* ---------- divider ---------- */
+  .divider{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    width:100%;
+    margin:34px 0 22px;
+  }
+  .divider span{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+  }
+  .divider::before, .divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- donate / QRIS ticket ---------- */
+  .ticket{
+    width:100%;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    position:relative;
+    padding:26px 24px 22px;
+    text-align:center;
+  }
+
+  .ticket-notch{
+    position:absolute;
+    top:50%;
+    width:22px; height:22px;
+    background:var(--bg);
+    border-radius:50%;
+    transform:translateY(-50%);
+  }
+  .ticket-notch.left{ left:-11px; }
+  .ticket-notch.right{ right:-11px; }
+
+  .ticket-cut{
+    border:none;
+    border-top:1.5px dashed rgba(254,231,21,0.35);
+    margin:20px 0;
+  }
+
+  .ticket-eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--yellow);
+    margin-bottom:6px;
+  }
+
+  .ticket-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:19px;
+    margin:0 0 6px;
+  }
+
+  .ticket-sub{
+    font-size:13.5px;
+    color:var(--text-dim);
+    margin:0;
+    line-height:1.5;
+  }
+
+  .qr-frame{
+    width:190px;
+    height:190px;
+    margin:0 auto;
+    background:#ffffff;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    padding:10px;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .qr-frame:hover{
+    transform:scale(1.02);
+    box-shadow:0 0 0 4px rgba(254,231,21,0.18);
+  }
+  .qr-frame img{
+    width:100%; height:100%;
+    object-fit:contain;
+    border-radius:6px;
+  }
+  .qr-hint{
+    font-size:11px;
+    color:var(--text-dim);
+    margin-top:10px;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- QRIS fullscreen modal ---------- */
+  .qr-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(9,13,17,0.92);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:22px;
+    z-index:100;
+    padding:24px;
+    opacity:0;
+    transition:opacity .22s ease;
+  }
+  .qr-modal.open{
+    display:flex;
+    opacity:1;
+  }
+  .qr-modal-img-wrap{
+    width:min(78vw, 420px);
+    height:min(78vw, 420px);
+    background:#ffffff;
+    border-radius:18px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 0 2px var(--yellow), 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .qr-modal-img-wrap img{
+    width:100%; height:100%;
+    object-fit:contain;
+    border-radius:8px;
+  }
+  .qr-modal-actions{
+    display:flex;
+    gap:12px;
+  }
+  .qr-modal-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    letter-spacing:0.02em;
+    padding:11px 20px;
+    border-radius:10px;
+    border:1.5px solid var(--yellow);
+    background:transparent;
+    color:var(--yellow);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:background .2s ease, color .2s ease;
+  }
+  .qr-modal-btn.primary{
+    background:var(--yellow);
+    color:#111820;
+  }
+  .qr-modal-btn:hover{
+    background:var(--yellow);
+    color:#111820;
+  }
+  .qr-modal-btn svg{ width:15px; height:15px; }
+  .qr-modal-close{
+    position:absolute;
+    top:22px; right:24px;
+    width:40px; height:40px;
+    border-radius:50%;
+    border:1.5px solid var(--line);
+    background:var(--card);
+    color:var(--text);
+    font-size:18px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qr-modal-close:hover{
+    border-color:var(--yellow);
+    color:var(--yellow);
+  }
+  .qr-corner{
+    position:absolute;
+    width:16px; height:16px;
+    border:2.5px solid var(--yellow);
+  }
+  .qr-corner.tl{ top:-6px; left:-6px; border-right:none; border-bottom:none; border-radius:6px 0 0 0;}
+  .qr-corner.tr{ top:-6px; right:-6px; border-left:none; border-bottom:none; border-radius:0 6px 0 0;}
+  .qr-corner.bl{ bottom:-6px; left:-6px; border-right:none; border-top:none; border-radius:0 0 0 6px;}
+  .qr-corner.br{ bottom:-6px; right:-6px; border-left:none; border-top:none; border-radius:0 0 6px 0;}
+
+  .qr-caption{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--yellow);
+    margin-top:14px;
+  }
+  .qr-name{
+    font-size:12px;
+    color:var(--text-dim);
+    margin-top:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .link-item, .link-item::before{ transition:none; }
+  }
+
+  a:focus-visible, .link-item:focus-visible{
+    outline:2px solid var(--yellow);
+    outline-offset:3px;
+  }
+</style>
 </head>
-
 <body>
-<div class="container">
+  <div class="wrap">
 
-<div class="card profile">
-  <div class="avatar"></div>
-  <h1>Shine Is One</h1>
-  <p class="subtitle">Romance ID 👑</p>
+    <div class="eyebrow">Shine Is One Profile</div>
 
-  <div class="links">
-    <a class="link-item" href="https://mangadex.org/group/65234e45-8700-4a4a-95e0-ff344d72f430/romance-id" target="_blank">
-      <div class="link-icon"><img src="images/Mangadex.png"></div>
-      Mangadex
-    </a>
+    <div class="avatar">
+      <img src="images/Avatar.jpg" alt="Shine Is One">
+    </div>
 
-    <a class="link-item" href="https://www.tiktok.com/@shineisone" target="_blank">
-      <div class="link-icon"><img src="images/Tiktok.png"></div>
-      TikTok
-    </a>
+    <h1 class="name">Shine Is One</h1>
+    <p class="bio">Shine like the sun and be one like Gunawan</p>
 
-    <a class="link-item" href="https://www.instagram.com/shine.is.one" target="_blank">
-      <div class="link-icon"><img src="images/Instagram.png"></div>
-      Instagram
-    </a>
+    <div class="links" style="margin-top:26px;">
 
-    <a class="link-item" href="https://shineisone.github.io/RomanceID/" target="_blank">
-      <div class="link-icon"><img src="images/Manga.png"></div>
-      List Project TL Manga
-    </a>
-    <button class="donate-btn" onclick="openQR()">Donate via QRIS</button>
+      <a class="link-item" href="https://www.instagram.com/shine.is.one/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Instagram</span>
+          <span class="link-sub">@shine.is.one</span>
+        </span>
+        <span class="link-tag">IG</span>
+      </a>
+
+      <a class="link-item" href="https://www.instagram.com/hikaru__desu/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Instagram 2</span>
+          <span class="link-sub">@hikaru__desu</span>
+        </span>
+        <span class="link-tag">IG</span>
+      </a>
+
+      <a class="link-item" href="https://www.tiktok.com/@shineisone" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v9.2a3.4 3.4 0 1 1-2.6-3.3"/><path d="M14 4c.4 2.2 2 3.8 4.2 4.1"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">TikTok</span>
+          <span class="link-sub">@shineisone</span>
+        </span>
+        <span class="link-tag">TikTok</span>
+      </a>
+
+      <a class="link-item" href="https://shineisone.github.io/RomanceID/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9c-2.4-2.6-3.6-5.6-3.6-9s1.2-6.4 3.6-9z"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Project Manga</span>
+          <span class="link-sub">shineisone.github.io/RomanceID</span>
+        </span>
+        <span class="link-tag">Web</span>
+      </a>
+
+      <a class="link-item" href="https://shineisone.github.io/Manga-Date/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9c-2.4-2.6-3.6-5.6-3.6-9s1.2-6.4 3.6-9z"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Manga Schedule</span>
+          <span class="link-sub">shineisone.github.io/Manga-Date</span>
+        </span>
+        <span class="link-tag">Web</span>
+      </a>
+
+      <a class="link-item" href="https://shineisone.github.io/Anime-List-Shine/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9c-2.4-2.6-3.6-5.6-3.6-9s1.2-6.4 3.6-9z"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Anime List</span>
+          <span class="link-sub">shineisone.github.io/Anime-List-Shine</span>
+        </span>
+        <span class="link-tag">Web</span>
+      </a>
+
+    </div>
+
+    <div class="divider"><span>Dukung Lewat</span></div>
+
+    <div class="ticket">
+      <span class="ticket-notch left"></span>
+      <span class="ticket-notch right"></span>
+
+      <div class="ticket-eyebrow">Traktir Aku</div>
+      <h2 class="ticket-title">Donasi via QRIS</h2>
+      <p class="ticket-sub">Scan kode di bawah pakai aplikasi e-wallet atau m-banking favoritmu.</p>
+
+      <hr class="ticket-cut">
+
+      <div class="qr-frame" id="qrOpen" role="button" tabindex="0" aria-label="Perbesar kode QRIS">
+        <span class="qr-corner tl"></span>
+        <span class="qr-corner tr"></span>
+        <span class="qr-corner bl"></span>
+        <span class="qr-corner br"></span>
+        <img src="images/QRIS Shine.jpg" alt="QRIS Shine Is One">
+      </div>
+      <div class="qr-hint">Ketuk untuk perbesar</div>
+
+      <div class="qr-caption">QRIS · Semua E-Wallet & Bank</div>
+      <div class="qr-name">a.n. Shine Is One</div>
+    </div>
+
   </div>
-</div>
 
-<button class="collapse-btn" onclick="toggleTutorial()">
-  Tutorial Buka Web Mangadex
-</button>
-
-<div class="card tutorial" id="tutorial">
-
-<h2>Cara membuka website Mangadex.org</h2>
-
-<p>
-MangaDex sering tidak bisa dibuka langsung karena diblokir oleh provider di Indonesia.
-Cara blokirnya lewat pengaturan internet provider, sehingga alamat websitenya tidak bisa ditemukan.
-Hal ini mirip dengan yang terjadi pada Reddit, di mana situs baru bisa diakses normal jika memakai DNS publik seperti 1.1.1.1 atau VPN.
-Jadi, masalahnya ada di pembatasan akses lokal, bukan di websitenya.
-</p>
-
-<div class="section-title">Android</div>
-
-<p>
-Cara pertama kalau di Android, misal browser kalian Chrome, itu bisa buka mangadex dengan mudah.
-</p>
-
-<div class="step">
-<p>1.) Tekan titik tiga di pojok kanan atas</p>
-<img src="images/mangadex-tutorial/android-chrome/1.jpg">
-</div>
-
-<div class="step">
-<p>2.) Pilih "Setelan"</p>
-<img src="images/mangadex-tutorial/android-chrome/2.jpg">
-</div>
-
-<div class="step">
-<p>3.) Pilih "Privasi dan keamanan"</p>
-<img src="images/mangadex-tutorial/android-chrome/3.jpg">
-</div>
-
-<div class="step">
-<p>4.) Pilih "Gunakan DNS aman"</p>
-<img src="images/mangadex-tutorial/android-chrome/4.jpg">
-</div>
-
-<div class="step">
-<p>
-5.) Aktifkan "Gunakan DNS aman", dan pilih yang "Pilih penyedia lain".
-Kemudian pilih yang "Cloudflare (1.1.1.1)"
-</p>
-<img src="images/mangadex-tutorial/android-chrome/5.jpg">
-</div>
-
-<p>
-Cara kedua kalau di Android, bisa dengan cara mengubah settingan jaringan di Peraturan.
-</p>
-
-<div class="step">
-<p>
-1.) Buka "Peraturan" di Android, kemudian cari "Koneksi & Berbagi".
-(Kalau susah carinya, cari aja di pencarian Peraturan "DNS")
-</p>
-<img src="images/mangadex-tutorial/android-setting/a.jpg">
-</div>
-
-<div class="step">
-<p>2.) Kemudian pilih "DNS Pribadi"</p>
-<img src="images/mangadex-tutorial/android-setting/b.jpg">
-</div>
-
-<div class="step">
-<p>
-3.) Pilih "DNS pribadi khusus", dan isi dengan:
-<span class="highlight copyable" onclick="copyDNS()">1dot1dot1dot1.cloudflare-dns.com</span>
-<span id="copy-note" class="copy-note">tersalin</span>
-</p>
-<img src="images/mangadex-tutorial/android-setting/c.jpg">
-</div>
-
-<p>
-Selain DNS, di Android bisa menggunakan VPN, yaa kalian tahu sendiri lah,
-tinggal download VPN di Play Store, saran dari gw VPN yang bagus
-(sebenarnya masih DNS sih), nama apknya
-<a class="highlight link-warp" href="https://play.google.com/store/apps/details?id=com.cloudflare.onedotonedotonedotone&hl=id" target="_blank">
-1.1.1.1 + WARP
-</a>.
-</p>
-
-<div class="section-title">iPhone</div>
-
-<p>
-Selanjutnya untuk para user iPhone, ini agak ribet nih,
-karena iPhone tidak ada settingan DNS di browser mereka.
-Jadi cara pertama, download VPN, atau cara kedua kalau tidak mau ribet pakek VPN,
-dengan cara "Private Browsing/Pribadi" di Safari.
-</p>
-
-<p>
-Kekurangan dari cara ini adalah tidak bisa simpan login akun mangadex kalian.
-Jadi cuman bisa cari manga &gt; baca.
-Tidak bisa kayak komentar, save manga, dll.
-</p>
-
-<div class="step">
-<img src="images/mangadex-tutorial/iphone/x.jpg">
-</div>
-
-<div class="step">
-<img src="images/mangadex-tutorial/iphone/z.jpg">
-</div>
-
-</div>
-
-<button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑</button>
-</div>
-
-<div id="qrisModal" class="modal" onclick="closeQR()">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <img src="images/QRIS.jpg" alt="QRIS">
-
-    <a href="images/QRIS.jpg" download="QRIS-Shine-Is-One.jpg" target="_blank" rel="noopener">
-      Download
-    </a>
-
-    <button class="close-btn" onclick="closeQR()">Tutup</button>
+  <!-- ---------- QRIS fullscreen modal ---------- -->
+  <div class="qr-modal" id="qrModal">
+    <button class="qr-modal-close" id="qrClose" aria-label="Tutup">✕</button>
+    <div class="qr-modal-img-wrap">
+      <img src="images/QRIS Shine.jpg" alt="QRIS Shine Is One - Perbesar">
+    </div>
+    <div class="qr-modal-actions">
+      <a class="qr-modal-btn primary" id="qrDownload" href="images/QRIS Shine.jpg" download="QRIS-Shine-Is-One.jpg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download QRIS
+      </a>
+    </div>
   </div>
-</div>
 
+  <script>
+    (function(){
+      var openBtn = document.getElementById('qrOpen');
+      var modal = document.getElementById('qrModal');
+      var closeBtn = document.getElementById('qrClose');
+
+      function openModal(){
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(){
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openModal);
+      openBtn.addEventListener('keypress', function(e){
+        if(e.key === 'Enter' || e.key === ' ') openModal();
+      });
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e){
+        if(e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
