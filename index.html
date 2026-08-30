@@ -420,6 +420,58 @@
     margin-top:2px;
   }
 
+  /* ---------- language toggle ---------- */
+  .lang-toggle{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin:0 0 16px;
+  }
+  .lang-btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    padding:7px 16px;
+    border-radius:999px;
+    border:1.5px solid var(--line);
+    background:transparent;
+    color:var(--text-dim);
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .lang-btn:hover{
+    border-color:var(--yellow-dim);
+    color:var(--text);
+  }
+  .lang-btn.active{
+    background:var(--yellow);
+    border-color:var(--yellow);
+    color:#111820;
+  }
+
+  /* ---------- Ko-fi card ---------- */
+  .kofi-frame{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:300px;
+    margin:0 auto;
+    background:transparent;
+    padding:0;
+    cursor:pointer;
+    transition:transform .18s ease, filter .18s ease;
+  }
+  .kofi-frame:hover{
+    transform:scale(1.03);
+    filter:drop-shadow(0 0 8px rgba(254,231,21,0.35));
+  }
+  .kofi-frame img{
+    width:100%;
+    height:auto;
+    display:block;
+  }
+
   @media (prefers-reduced-motion: reduce){
     .link-item, .link-item::before{ transition:none; }
   }
@@ -556,9 +608,14 @@
 
     </div>
 
-    <div class="divider"><span>Dukung Lewat</span></div>
+    <div class="divider"><span class="i18n" data-id="Dukung Lewat" data-en="Support via">Dukung Lewat</span></div>
 
-    <div class="ticket">
+    <div class="lang-toggle" role="group" aria-label="Bahasa / Language">
+      <button type="button" class="lang-btn active" data-lang="id">ID</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+    </div>
+
+    <div class="ticket lang-panel" data-lang="id">
       <span class="ticket-notch left"></span>
       <span class="ticket-notch right"></span>
 
@@ -579,6 +636,21 @@
 
       <div class="qr-caption">QRIS · Semua E-Wallet & Bank</div>
       <div class="qr-name">a.n. Shine Is One</div>
+    </div>
+
+    <div class="ticket lang-panel" data-lang="en" hidden>
+      <span class="ticket-notch left"></span>
+      <span class="ticket-notch right"></span>
+
+      <div class="ticket-eyebrow">Support</div>
+      <h2 class="ticket-title">Buy me a Ko-fi</h2>
+      <p class="ticket-sub">Tap the icon below to support via Ko-fi.</p>
+
+      <hr class="ticket-cut">
+
+      <a class="kofi-frame" href="https://ko-fi.com/shineisone" target="_blank" rel="noopener" aria-label="Support via Ko-fi">
+        <img src="images/ko-fi.png" alt="Ko-fi">
+      </a>
     </div>
 
   </div>
@@ -622,6 +694,36 @@
       });
       document.addEventListener('keydown', function(e){
         if(e.key === 'Escape') closeModal();
+      });
+    })();
+
+    (function(){
+      var langButtons = document.querySelectorAll('.lang-btn');
+      var textEls = document.querySelectorAll('.i18n');
+      var ariaEls = document.querySelectorAll('[data-id-aria]');
+      var panels = document.querySelectorAll('.lang-panel');
+
+      function setLang(lang){
+        textEls.forEach(function(el){
+          var val = el.getAttribute('data-' + lang);
+          if(val !== null) el.textContent = val;
+        });
+        ariaEls.forEach(function(el){
+          var val = el.getAttribute('data-' + lang + '-aria');
+          if(val !== null) el.setAttribute('aria-label', val);
+        });
+        panels.forEach(function(el){
+          el.hidden = el.getAttribute('data-lang') !== lang;
+        });
+        langButtons.forEach(function(btn){
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+      }
+
+      langButtons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          setLang(btn.getAttribute('data-lang'));
+        });
       });
     })();
   </script>
